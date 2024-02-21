@@ -41,3 +41,22 @@ list.forEach(function(link){
     li.innerText = link.href
     output.appendChild(li)
 })
+
+const balanceSpan    = document.querySelector("#balance")
+const moneyInput     = document.querySelector("#money")
+const withdrawButton = document.querySelector("#withdraw")
+let balance = balanceSpan.innerText
+
+function handleMoneyInput(){
+    let amount = parseInt(moneyInput.value)
+    moneyInput.classList.toggle("error", isNaN(amount) || amount > balance)
+}
+
+function handleWithdrawClick(){
+    let amount = parseInt(moneyInput.value)
+    if (!isNaN(amount)) balance -= amount
+    balanceSpan.innerText = balance
+}
+
+moneyInput.addEventListener("input", handleMoneyInput)
+withdrawButton.addEventListener("click", handleWithdrawClick)
